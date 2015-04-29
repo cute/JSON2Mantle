@@ -84,7 +84,7 @@ class JSON2Mantle(object):
 
             # implementation: aliases
             joined_aliases = '\n            '.join(
-                filter(lambda x: x, map(objc_tpl.alias_tpl, properties)))
+                map(objc_tpl.alias_tpl, properties))
 
             # implementation: transformers
             joined_transformers = '\n'.join(

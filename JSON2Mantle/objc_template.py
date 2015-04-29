@@ -42,7 +42,7 @@ def alias_tpl(data):
         @"postTime": @"post_time",
     """
     if data['name'] == data['original_name']:
-        return None
+        return '@"{}": @"{}",'.format(data['name'], data['name'])
     name = data['original_name']
     candidates = re.findall(r'(_\w)', name)
     if not candidates:
@@ -78,10 +78,10 @@ def transformer_tpl(data):
  */
 + (NSValueTransformer *){property}JSONTransformer
 {{
-    return [NSValueTransformer mtl_JSON{type}TransformerWithModelClass:{class_name}.class];
+    return [MTLJSONAdapter {type}TransformerWithModelClass:{class_name}.class];
 }}""".format(
         property=data['name'],
-        type=data['transform']['type'],
+        type=data['transform']['type'].lower(),
         class_name=data['transform']['class'],
     )
     return string
